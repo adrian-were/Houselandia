@@ -1,0 +1,88 @@
+{
+  "housesData": [
+    {
+      "id": 1,
+      "type": "Apartment",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Westlands",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 115000
+    },
+        {
+      "id": 2,
+      "type": "Bungalow",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Karen",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 230000
+    },
+        {
+      "id": 3,
+      "type": "Apartment",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Langata",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 120000
+    },
+        {
+      "id": 4,
+      "type": "Villa",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Kilimani",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 350000
+    },
+        {
+      "id": 5,
+      "type": "Villa",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Karen",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 600000
+    },
+        {
+      "id": 6,
+      "type": "Apartment",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Kasarani",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 70000
+    },
+    {
+      "id": 7,
+      "type": "Bungalow",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
+      "image": "./assets/img/houses/house1.png",
+      "imageLg": "./assets/img/houses/house1lg.png",
+      "location": "Kilimani",
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "surface": "4200sqft",
+      "price": 250000
+    }
+]
+}
