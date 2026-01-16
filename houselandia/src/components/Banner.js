@@ -9,10 +9,11 @@ function Banner() {
         <div className='lg:ml-8 xl:ml-[135px] flex flex-col items-center lg:items-start text-center lg:text-left justify-center flex-1 px-4 lg:px-0'>
           <h1 className='text-4xl lg:text-[58px] font-semibold leading-none mb-6'>
             <span className='text-violet-700'>Rent</span>
-             Your Dream Home With Us.
+             Nyumba Poa, Maisha Rahisi.
           </h1>
           <p className='max-w-[480px] mb-8'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.
+            Elevate your lifestyle with Nairobi’s most intuitive rental platform. We specialize in connecting professionals and families with high-quality bungalows, modern apartments, and executive mansions within the city’s premier zones.
+            Karibu to a smarter way of finding your next prestigious address.
           </p>
         </div>
         <div className='hidden flex-1 lg:flex justify-end items-end'>

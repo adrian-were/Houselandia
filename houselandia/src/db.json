@@ -76,10 +76,10 @@
       "id": 7,
       "type": "Bungalow",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
+      "image": "./assets/images/house1.png",
+      "imageLg": "./assets/images/house1.png",
       "location": "Kilimani",
-      "bedrooms": 6,
+      "bedrooms": 6,  
       "bathrooms": 3,
       "surface": "4200sqft",
       "price": 250000
