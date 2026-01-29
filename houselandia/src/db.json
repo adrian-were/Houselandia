@@ -1,88 +1,94 @@
 {
   "housesData": [
     {
-      "id": 1,
+      "id": "1",
       "type": "Apartment",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
       "location": "Westlands",
       "bedrooms": 6,
       "bathrooms": 3,
       "surface": "4200sqft",
-      "price": 115000
-    },
-        {
-      "id": 2,
-      "type": "Bungalow",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
-      "location": "Karen",
-      "bedrooms": 6,
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 230000
-    },
-        {
-      "id": 3,
-      "type": "Apartment",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
-      "location": "Langata",
-      "bedrooms": 6,
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 120000
-    },
-        {
-      "id": 4,
-      "type": "Villa",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
-      "location": "Kilimani",
-      "bedrooms": 6,
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 350000
-    },
-        {
-      "id": 5,
-      "type": "Villa",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
-      "location": "Karen",
-      "bedrooms": 6,
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 600000
-    },
-        {
-      "id": 6,
-      "type": "Apartment",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/img/houses/house1.png",
-      "imageLg": "./assets/img/houses/house1lg.png",
-      "location": "Kasarani",
-      "bedrooms": 6,
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 70000
+      "price": 115000,
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop",
+      "imageLg": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
+      "description": "Luxurious penthouse in the heart of Westlands. Features floor-to-ceiling windows, a wrap-around balcony, and high-end Italian finishes throughout. Perfect for urban professionals.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1527359443443-84a48abc7df0?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "agent": {
+        "name": "Sarah Njeri",
+        "phone": "+254712345678",
+        "image": "https://i.pravatar.cc/150?u=sarah"
+      }
     },
     {
-      "id": 7,
+      "id": "2",
       "type": "Bungalow",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.",
-      "image": "./assets/images/house1.png",
-      "imageLg": "./assets/images/house1.png",
+      "location": "Karen",
+      "bedrooms": 5,
+      "bathrooms": 4,
+      "surface": "5500sqft",
+      "price": 230000,
+      "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800&auto=format&fit=crop",
+      "imageLg": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop",
+      "description": "A charming classic bungalow nestled in the leafy suburbs of Karen. Includes a 1-acre garden, a detached guest wing, and a cozy fireplace for those cool Nairobi nights.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop"
+      ],
+      "agent": {
+        "name": "David Omari",
+        "phone": "+254722000111",
+        "image": "https://i.pravatar.cc/150?u=david"
+      }
+    },
+    {
+      "id": "3",
+      "type": "Apartment",
+      "location": "Langata",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "surface": "1800sqft",
+      "price": 120000,
+      "image": "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?q=80&w=800&auto=format&fit=crop",
+      "imageLg": "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?q=80&w=1200&auto=format&fit=crop",
+      "description": "Modern apartment with views of the Nairobi National Park. Secure complex with a swimming pool, gym, and high-speed elevators.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1493200062860-1533f814c07b?q=80&w=800&auto=format&fit=crop"
+      ],
+      "agent": {
+        "name": "Grace Wambui",
+        "phone": "+254733999888",
+        "image": "https://i.pravatar.cc/150?u=grace"
+      }
+    },
+    {
+      "id": "4",
+      "type": "Villa",
       "location": "Kilimani",
-      "bedrooms": 6,  
-      "bathrooms": 3,
-      "surface": "4200sqft",
-      "price": 250000
+      "bedrooms": 6,
+      "bathrooms": 5,
+      "surface": "6000sqft",
+      "price": 350000,
+      "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+      "imageLg": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1200&auto=format&fit=crop",
+      "description": "An architectural masterpiece in Kilimani. This villa offers triple-volume ceilings, a private cinema, and an infinity pool overlooking the garden.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1613977257592-4871e5fcd7c4?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop"
+      ],
+      "agent": {
+        "name": "John Otieno",
+        "phone": "+254711222333",
+        "image": "https://i.pravatar.cc/150?u=john"
+      }
     }
-]
+  ]
 }

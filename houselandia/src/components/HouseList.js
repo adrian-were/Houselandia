@@ -12,14 +12,14 @@ const HouseList = () => {
     setLoading(true);
     
     // Construct the API URL
-    // JSON Server ignores empty parameters, so this works perfectly
+    // JSON Server handles the search string (e.g., ?type=House) automatically
     const apiUrl = `http://localhost:8000/housesData${search}`;
 
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
         setHouses(data);
-        // Artificial delay for smooth UX
+        // Artificial delay for smooth UX transition
         setTimeout(() => setLoading(false), 600); 
       })
       .catch((err) => {
@@ -50,7 +50,7 @@ const HouseList = () => {
           </div>
           <Link to="/" className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-xl shadow-sm border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors">
             <FontAwesomeIcon icon={faArrowLeft} />
-            <span>Modify Search</span>
+            <span>Back</span>
           </Link>
         </div>
 
@@ -58,7 +58,12 @@ const HouseList = () => {
         {houses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {houses.map((house) => (
-              <div key={house.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+              /* The entire card is now a Link pointing to the details page */
+              <Link 
+                to={`/house/${house.id}`} 
+                key={house.id} 
+                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
+              >
                 {/* Image Container */}
                 <div className="relative overflow-hidden h-72">
                   <img 
@@ -74,13 +79,17 @@ const HouseList = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-8">
+                <div className="p-8 flex-grow">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900">{house.location}</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {house.location}
+                      </h2>
                     </div>
                     <div className="text-right">
-                      <p className="text-blue-600 text-xl font-black">Ksh {house.price.toLocaleString()}</p>
+                      <p className="text-blue-600 text-xl font-black">
+                        Ksh {house.price ? house.price.toLocaleString() : "N/A"}
+                      </p>
                     </div>
                   </div>
                   
@@ -110,7 +119,7 @@ const HouseList = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
@@ -119,7 +128,7 @@ const HouseList = () => {
             <div className="max-w-md mx-auto">
               <h3 className="text-2xl font-bold text-gray-900">No Match Found</h3>
               <p className="text-gray-500 mt-3 mb-8">We couldn't find any houses matching your specific filters. Try expanding your search area or price range.</p>
-              <Link to="/" className="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
+              <Link to="/houses" className="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
                 Clear all filters
               </Link>
             </div>
