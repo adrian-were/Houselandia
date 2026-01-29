@@ -1,27 +1,37 @@
-import React from 'react'; // Removed useEffect
-import { Routes, Route } from 'react-router-dom'; // Removed useNavigate and useLocation
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import HouseList from './components/HouseList'; // 1. Import your new component
+import HouseList from './components/HouseList';
 
 function App() {
-  // Removed the useEffect that was forcing navigation to '/'
-  
+  // State to control if the login modal is visible
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+
   return (
     <div className="App flex flex-col min-h-screen bg-white"> 
-      <Header />
+      {/* Pass the opener function to your Header */}
+      <Header onLoginClick={() => setIsLoginOpen(true)} 
+        onSignupClick={() => setIsSignupOpen(true)}
+        />
+      
+
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Banner />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* 2. Add the results route here */}
           <Route path="/results" element={<HouseList />} />
         </Routes>
       </main>
+
+      {/* The Login Modal sits outside the Routes so it can overlay any page */}
+      <Login isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <Signup isOpen={isSignupOpen} onClose={() => setIsSignupOpen(false)} />
+
       <Footer />
     </div>
   );
