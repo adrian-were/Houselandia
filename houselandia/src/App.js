@@ -1,62 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import LogoutModal from './components/LogoutModal'; // Import the new modal
 import HouseList from './components/HouseList';
-import ProtectedRoute from './components/ProtectedRoute';
 import HouseDetails from './components/HouseDetails';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // New State
   const [user, setUser] = useState(null);
-  const [showToast, setShowToast] = useState(false); // New State
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedUser = localStorage.getItem('userEmail');
     if (savedUser) setUser(savedUser);
   }, []);
 
-  const handleLogout = () => {
+  // This function is now called ONLY after the user confirms in the modal
+  const handleConfirmLogout = () => {
     localStorage.removeItem('userEmail');
     setUser(null);
+    setIsLogoutModalOpen(false); // Close the modal
+    navigate('/'); // Redirect to Banner page
   };
 
   const handleLoginSuccess = (email) => {
     setUser(email);
     localStorage.setItem('userEmail', email);
-    
-    // Trigger the Welcome Toast
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 4000); 
   };
 
   return (
-    <div className="App flex flex-col min-h-screen bg-slate-50 text-gray-900 font-secondary relative"> 
+    <div className="App flex flex-col min-h-screen bg-slate-50 text-gray-900 font-secondary"> 
+      {/* Header logout click now just opens the confirmation modal */}
       <Header 
         user={user} 
-        onLogout={handleLogout}
+        onLogout={() => setIsLogoutModalOpen(true)} 
         onLoginClick={() => setIsLoginOpen(true)} 
         onSignupClick={() => setIsSignupOpen(true)} 
       />
-
-      {/* Welcome Toast Notification */}
-      {showToast && (
-        <div className="fixed bottom-10 right-10 z-[100] animate-in slide-in-from-right-10 duration-500">
-          <div className="bg-gray-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-gray-700">
-            <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-xl">
-              👋
-            </div>
-            <div>
-              <p className="font-bold">Welcome back!</p>
-              <p className="text-sm text-gray-400">Successfully unlocked property details.</p>
-            </div>
-          </div>
-        </div>
-      )}
 
       <main className="flex-grow">
         <Routes>
@@ -73,12 +60,22 @@ function App() {
         </Routes>
       </main>
 
+      {/* Modal Components */}
       <Login 
         isOpen={isLoginOpen} 
         onClose={() => setIsLoginOpen(false)} 
         onLoginSuccess={handleLoginSuccess} 
       />
-      <Signup isOpen={isSignupOpen} onClose={() => setIsSignupOpen(false)} />
+      <Signup 
+        isOpen={isSignupOpen} 
+        onClose={() => setIsSignupOpen(false)} 
+      />
+      <LogoutModal 
+        isOpen={isLogoutModalOpen} 
+        onClose={() => setIsLogoutModalOpen(false)} 
+        onConfirm={handleConfirmLogout} 
+      />
+
       <Footer />
     </div>
   );

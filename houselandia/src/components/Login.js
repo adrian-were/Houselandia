@@ -27,6 +27,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
       const data = await response.json();
 
       if (response.ok) {
+        const data = await response.json();
         // 1. Update global state in App.js
         onLoginSuccess(data.email);
         
