@@ -1,65 +1,119 @@
-import React from 'react';
 
-const Login = ({ isOpen, onClose }) => {
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Login = ({ isOpen, onClose, onLoginSuccess }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+  const navigate = useNavigate(); // Hook for redirection
+
   if (!isOpen) return null;
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // 1. Update global state in App.js
+        onLoginSuccess(data.email);
+        
+        // 2. Close the modal
+        onClose();
+
+        // 3. Redirect user to the results page
+        navigate('/results');
+      } else {
+        setError(data.error || 'Invalid email or password');
+      }
+    } catch (err) {
+      setError('Connection to server failed. Is the Flask backend running?');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Close modal when clicking on the dark backdrop
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };
 
   return (
-    <>
-      <style>
-        {`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-          }
-          .animate-modal {
-            animation: fadeIn 0.2s ease-out forwards;
-          }
-        `}
-      </style>
-      <div 
-        onClick={handleBackdropClick}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity"
-      >
-        <section className="animate-modal relative w-full max-w-md bg-white rounded-xl shadow-2xl dark:bg-gray-800 border dark:border-gray-700">
-          
-          {/* Close Button */}
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+    <div 
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+    >
+      <section className="relative w-full max-w-md bg-white rounded-xl shadow-2xl dark:bg-gray-800 p-8 border dark:border-gray-700 animate-in fade-in zoom-in duration-200">
+        
+        {/* Close Button */}
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
-          <div className="p-8">
-            <div className="flex flex-col items-center mb-8">
-              <img className="w-10 h-10 mb-3" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
-            </div>
+        <div className="flex flex-col items-center mb-8">
+          <img className="w-10 h-10 mb-3" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
+        </div>
 
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
-                <input type="email" className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="name@company.com" required />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                <input type="password" className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="••••••••" required />
-              </div>
-              
-              <button type="submit" className="w-full py-3 px-4 text-white bg-violet-600 hover:bg-violet-700 font-semibold rounded-lg shadow-lg hover:shadow-violet-500/30 transition-all transform active:scale-95">
-                Sign In
-              </button>
-            </form>
+        {error && (
+          <div className="mb-4 p-3 text-sm text-red-600 bg-red-50 rounded-lg border border-red-200 text-center">
+            {error}
           </div>
-        </section>
-      </div>
-    </>
+        )}
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+            <input 
+              type="email" 
+              className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@company.com"
+              required 
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+            <input 
+              type="password" 
+              className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required 
+            />
+          </div>
+          
+          <button 
+            type="submit" 
+            disabled={loading}
+            className={`w-full py-3 text-white font-bold rounded-lg shadow-lg transition-all transform active:scale-95 ${
+              loading ? 'bg-violet-400 cursor-not-allowed' : 'bg-violet-600 hover:bg-violet-700'
+            }`}
+          >
+            {loading ? 'Verifying...' : 'Sign In'}
+          </button>
+        </form>
+      </section>
+    </div>
   );
 };
 
