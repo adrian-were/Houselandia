@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # 1. Database Configuration
 # This creates a file named 'database.db' in your project folder
@@ -52,6 +52,10 @@ def login():
         return jsonify({"message": "Login successful", "email": user.email}), 200
     
     return jsonify({"error": "Invalid email or password"}), 401
+
+@app.route('/api/test', methods=['GET'])
+def test():
+    return jsonify({"status": "Server is up and running!"}), 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

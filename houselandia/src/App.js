@@ -52,7 +52,9 @@ function App() {
           <Route 
             path="/house/:id" 
             element={
-              <ProtectedRoute user={user} onOpenLogin={() => setIsLoginOpen(true)}>
+              <ProtectedRoute user={user} 
+              onOpenLogin={() => setIsLoginOpen(true)} 
+              onOpenSignup={() => setIsSignupOpen(true)}>
                 <HouseDetails />
               </ProtectedRoute>
             } 

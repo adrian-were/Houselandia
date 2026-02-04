@@ -12,7 +12,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
@@ -27,20 +27,22 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
       const data = await response.json();
 
       if (response.ok) {
-        const data = await response.json();
         // 1. Update global state in App.js
         onLoginSuccess(data.email);
         
         // 2. Close the modal
         onClose();
 
-        // 3. Redirect user to the results page
-        navigate('/results');
+        /* NOTE: Do NOT use navigate('/results') here. 
+           If the user was already at /house/:id, updating the 'user' state 
+           will cause the ProtectedRoute to re-render and show the house 
+           details immediately without moving the user.
+        */
       } else {
         setError(data.error || 'Invalid email or password');
       }
     } catch (err) {
-      setError('Connection to server failed. Is the Flask backend running?');
+      setError('Connection to server failed.');
     } finally {
       setLoading(false);
     }

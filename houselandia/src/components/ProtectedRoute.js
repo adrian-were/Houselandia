@@ -1,81 +1,69 @@
 import React, { useEffect } from 'react';
 
-const ProtectedRoute = ({ user, children, onOpenLogin }) => {
+const ProtectedRoute = ({ user, children, onOpenLogin, onOpenSignup }) => {
   useEffect(() => {
-    // If user is not logged in, trigger the login modal automatically
-    if (!user) {
-      onOpenLogin();
-    }
-  }, [user, onOpenLogin]);
+    // We won't auto-open a modal anymore; we'll show the selection screen first
+  }, [user]);
 
-  // If user is authenticated, render the actual component (HouseDetails)
   if (user) {
     return children;
   }
 
-  // If user is NOT authenticated, show this "Locked" state
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gray-50">
-      
-      {/* Background Decor (Blurred Shapes) to simulate hidden content */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-        <div className="w-[500px] h-[500px] bg-blue-200 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="w-[400px] h-[400px] bg-violet-200 rounded-full blur-[100px] ml-[-200px] mt-[-100px]"></div>
+    <div className="relative min-h-[80vh] w-full flex items-center justify-center bg-slate-50">
+      {/* Visual background decor */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-200/30 rounded-full blur-[120px]"></div>
       </div>
 
-      {/* The Locked Content Card */}
-      <div className="relative z-10 container mx-auto px-6">
-        <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-xl border border-white p-8 md:p-12 rounded-[3rem] shadow-2xl text-center">
-          
-          {/* Icon with Ring Animation */}
-          <div className="relative w-24 h-24 mx-auto mb-8">
-            <div className="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-20"></div>
-            <div className="relative w-full h-full bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl shadow-lg">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-10 w-10" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" 
-                />
-              </svg>
-            </div>
+      <div className="relative z-10 w-full max-w-md px-6">
+        <div className="bg-gray-900 border border-gray-800 p-8 md:p-10 rounded-[2.5rem] shadow-2xl text-center">
+          {/* Brand/Status Icon */}
+          <div className="w-16 h-16 bg-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg rotate-3">
+             <span className="text-white text-3xl font-bold">L</span>
           </div>
 
-          <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">
-            Unlock Property Details
-          </h2>
-          
-          <p className="text-gray-600 text-lg mb-10 max-w-md mx-auto leading-relaxed">
-            You're just one step away! Log in to access high-quality galleries, 
-            exact locations, and direct contact with our premium agents.
+          <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">Sign in</h2>
+          <p className="text-gray-400 mb-10 leading-relaxed">
+            Join Houselandia to view full property details, interior galleries, and contact agents.
           </p>
+          
+          <div className="space-y-4">
+            {/* Primary Action: Create Account */}
+            <button 
+              onClick={onOpenSignup}
+              className="w-full bg-violet-700 hover:bg-violet-600 text-white py-4 rounded-2xl font-bold transition-all shadow-xl shadow-violet-900/20 active:scale-[0.98]"
+            >
+              Create an account
+            </button>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex items-center gap-4 py-2">
+              <div className="h-[1px] bg-gray-800 flex-grow"></div>
+              <span className="text-gray-600 text-sm font-medium uppercase tracking-widest">or</span>
+              <div className="h-[1px] bg-gray-800 flex-grow"></div>
+            </div>
+
+            {/* Secondary Action: Login */}
             <button 
               onClick={onOpenLogin}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-blue-200 active:scale-95"
+              className="w-full bg-transparent border border-gray-700 text-violet-400 py-4 rounded-2xl font-bold hover:bg-gray-800 hover:text-violet-300 transition-all active:scale-[0.98]"
             >
-              Sign In Now
-            </button>
-            <button 
-              onClick={() => window.history.back()}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-10 py-4 rounded-2xl font-bold transition-all active:scale-95"
-            >
-              Keep Browsing
+              Sign in to an existing account
             </button>
           </div>
 
-          <p className="mt-8 text-sm text-gray-400 font-medium italic">
-            Trusted by over 10,000+ home seekers in Nairobi.
+          <p className="mt-8 text-xs text-gray-500 leading-relaxed">
+            By signing in, you agree to Houselandia's <span className="text-violet-500 cursor-pointer hover:underline">Terms of Service</span> and <span className="text-violet-500 cursor-pointer hover:underline">Privacy Policy</span>.
           </p>
         </div>
+        
+        <button 
+          onClick={() => window.history.back()}
+          className="mt-6 w-full text-gray-500 font-medium hover:text-gray-800 transition-colors flex items-center justify-center gap-2"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          Back to browsing
+        </button>
       </div>
     </div>
   );
