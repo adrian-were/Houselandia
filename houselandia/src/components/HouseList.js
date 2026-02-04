@@ -39,14 +39,14 @@ const HouseList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div className="min-h-screen bg-gray-800 py-12 px-6">
       <div className="max-w-7xl mx-auto">
         
         {/* Navigation Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Available Houses</h1>
-            <p className="text-gray-500 mt-2">Found {houses.length} properties matching your criteria</p>
+            <h1 className="text-4xl font-bold text-white">Available Houses</h1>
+            <p className="text-white mt-2">Found {houses.length} properties matching your criteria</p>
           </div>
           <Link to="/" className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-xl shadow-sm border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors">
             <FontAwesomeIcon icon={faArrowLeft} />

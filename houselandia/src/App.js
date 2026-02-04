@@ -36,7 +36,7 @@ function App() {
   };
 
   return (
-    <div className="App flex flex-col min-h-screen bg-slate-50 text-gray-900 font-secondary"> 
+    <div className="App flex flex-col min-h-screen bg-gray-900 text-white font-secondary"> 
       {/* Header logout click now just opens the confirmation modal */}
       <Header 
         user={user} 
