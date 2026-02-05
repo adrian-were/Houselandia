@@ -31,7 +31,7 @@ const HouseList = () => {
   // Loading Spinner Component
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800">
         <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
         <p className="mt-4 text-gray-500 font-medium">Searching properties...</p>
       </div>
@@ -62,7 +62,7 @@ const HouseList = () => {
               <Link 
                 to={`/house/${house.id}`} 
                 key={house.id} 
-                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
+                className="group bg-gray-700 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
               >
                 {/* Image Container */}
                 <div className="relative overflow-hidden h-72">
@@ -72,7 +72,7 @@ const HouseList = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-5 left-5">
-                    <span className="bg-white/90 backdrop-blur-md text-gray-900 px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
+                    <span className="bg-black/90 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
                       {house.type}
                     </span>
                   </div>
@@ -82,23 +82,23 @@ const HouseList = () => {
                 <div className="p-8 flex-grow">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      <h2 className="text-2xl font-bold text-white group-hover:text-violet-600 transition-colors">
                         {house.location}
                       </h2>
                     </div>
                     <div className="text-right">
-                      <p className="text-blue-600 text-xl font-black">
+                      <p className="text-violet-600 text-xl font-black">
                         Ksh {house.price ? house.price.toLocaleString() : "N/A"}
                       </p>
                     </div>
                   </div>
                   
-                  <p className="text-gray-500 leading-relaxed mb-8 line-clamp-2">
+                  <p className="text-white leading-relaxed mb-8 line-clamp-2">
                     {house.description}
                   </p>
 
                   {/* House Specs */}
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-50 text-gray-600">
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-50 text-white">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                         <FontAwesomeIcon icon={faBed} />
@@ -124,13 +124,10 @@ const HouseList = () => {
           </div>
         ) : (
           /* Empty State Section */
-          <div className="text-center py-32 bg-white rounded-[2rem] border-2 border-dashed border-gray-100">
+          <div className="text-center bg-gray-700 py-32 bg-white rounded-[2rem] border-2 border-dashed border-gray-100">
             <div className="max-w-md mx-auto">
-              <h3 className="text-2xl font-bold text-gray-900">No Match Found</h3>
-              <p className="text-gray-500 mt-3 mb-8">We couldn't find any houses matching your specific filters. Try expanding your search area or price range.</p>
-              <Link to="/houses" className="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all">
-                Clear all filters
-              </Link>
+              <h3 className="text-2xl font-bold text-white">No Match Found</h3>
+              <p className="text-white mt-3 mb-8">We couldn't find any houses matching your specific search. Try going back and do a different search.</p>
             </div>
           </div>
         )}

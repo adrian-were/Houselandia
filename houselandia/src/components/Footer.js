@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-   <footer className="bg-gray-950 border-t border-gray-900">
+   <footer className="bg-gray-950 border-t border-gray-900 mt-10">
     <div className="max-w-screen-xl px-4 py-8 mx-auto space-y-6 overflow-hidden sm:px-6 lg:px-8">
         {/* Navigation - Light text for dark background */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
