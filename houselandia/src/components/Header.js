@@ -5,7 +5,9 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Scroll Listener to toggle background transparency
+  // Replace this with your actual admin email
+  const ADMIN_EMAIL = "shisia@gmail.com";
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -14,7 +16,6 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Helper to close mobile menu when an action is taken
   const handleAction = (callback) => {
     setIsMobileMenuOpen(false);
     callback();
@@ -29,15 +30,23 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
       }`}
     >
       <div className='container mx-auto flex justify-between items-center px-4'>
-        {/* Logo */}
         <Link to='/' onClick={() => setIsMobileMenuOpen(false)}>
           <span className="text-2xl font-bold text-white tracking-tight">Logo</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className='hidden md:flex items-center gap-8'>
           {user ? (
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-6'>
+              {/* --- RESTRICTED DASHBOARD LINK --- */}
+              {user === ADMIN_EMAIL && (
+                <Link 
+                  to="/admin" 
+                  className="text-sm font-bold text-violet-400 hover:text-violet-300 transition-colors"
+                >
+                  Dashboard
+                </Link>
+              )}
+              
               <span className="text-gray-400 text-sm font-medium">
                 Logged in as: <b className="text-violet-400">{user.split('@')[0]}</b>
               </span>
@@ -50,27 +59,17 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
             </div>
           ) : (
             <div className='flex items-center gap-8'>
-              <button 
-                onClick={onLoginClick} 
-                className='text-white hover:text-violet-400 font-semibold transition-colors cursor-pointer'
-              >
+              <button onClick={onLoginClick} className='text-white hover:text-violet-400 font-semibold transition-colors'>
                 Log in
               </button>
-              <button 
-                onClick={onSignupClick} 
-                className='bg-violet-700 hover:bg-violet-600 text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-violet-900/20 active:scale-95'
-              >
+              <button onClick={onSignupClick} className='bg-violet-700 hover:bg-violet-600 text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-violet-900/20 active:scale-95'>
                 Sign up
               </button>
             </div>
           )}
         </div>
 
-        {/* Mobile Toggle Button */}
-        <button 
-          className="md:hidden text-white p-2 focus:outline-none"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
+        <button className="md:hidden text-white p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -81,37 +80,31 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       <div className={`md:hidden absolute w-full transition-all duration-300 ease-in-out bg-gray-900 border-b border-gray-800 overflow-hidden ${
-        isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+        isMobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
       }`}>
         <div className="flex flex-col p-6 gap-4 text-center">
           {user ? (
             <>
-              <span className="text-gray-400 text-sm">
-                Logged in as: <b className="text-violet-400">{user}</b>
-              </span>
-              <button 
-                onClick={() => handleAction(onLogout)} 
-                className="text-red-500 font-bold py-2 hover:bg-red-500/10 rounded-lg transition-all"
-              >
+              {/* --- RESTRICTED MOBILE DASHBOARD LINK --- */}
+              {user === ADMIN_EMAIL && (
+                <Link 
+                  to="/admin" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-violet-400 font-bold py-2 hover:bg-violet-500/10 rounded-lg transition-all"
+                >
+                  Dashboard
+                </Link>
+              )}
+              <span className="text-gray-400 text-sm">Logged in as: <b className="text-violet-400">{user}</b></span>
+              <button onClick={() => handleAction(onLogout)} className="text-red-500 font-bold py-2 hover:bg-red-500/10 rounded-lg transition-all">
                 Log out
               </button>
             </>
           ) : (
             <>
-              <button 
-                onClick={() => handleAction(onLoginClick)} 
-                className="text-white font-semibold py-2 hover:text-violet-400 transition-all"
-              >
-                Log in
-              </button>
-              <button 
-                onClick={() => handleAction(onSignupClick)} 
-                className="bg-violet-700 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 transition-all"
-              >
-                Sign up
-              </button>
+              <button onClick={() => handleAction(onLoginClick)} className="text-white font-semibold py-2 hover:text-violet-400 transition-all">Log in</button>
+              <button onClick={() => handleAction(onSignupClick)} className="bg-violet-700 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 transition-all">Sign up</button>
             </>
           )}
         </div>

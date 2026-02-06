@@ -9,6 +9,7 @@ import LogoutModal from './components/LogoutModal'; // Import the new modal
 import HouseList from './components/HouseList';
 import HouseDetails from './components/HouseDetails';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminDashboard from './components/admin/AdminDashboard'; // Import AdminDashboard
 
 function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -56,6 +57,19 @@ function App() {
               onOpenLogin={() => setIsLoginOpen(true)} 
               onOpenSignup={() => setIsSignupOpen(true)}>
                 <HouseDetails />
+              </ProtectedRoute>
+            } 
+          />
+          {/* New Admin Route Added Below */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute 
+                user={user === "shisia@gmail.com" ? user : null} 
+                onOpenLogin={() => setIsLoginOpen(true)} 
+                onOpenSignup={() => setIsSignupOpen(true)}
+              >
+                <AdminDashboard />
               </ProtectedRoute>
             } 
           />
