@@ -7,7 +7,7 @@ const AdminHouseCard = ({ house, onEdit, onDelete }) => {
       <div className="relative w-full md:w-48 h-32 overflow-hidden rounded-3xl">
         <img 
           src={house.image} 
-          alt={house.title} 
+          alt={house.type} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 to-transparent"></div>
@@ -16,12 +16,18 @@ const AdminHouseCard = ({ house, onEdit, onDelete }) => {
       {/* 2. Property Information */}
       <div className="flex-grow text-center md:text-left space-y-1">
         <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-          <h3 className="text-white font-bold text-xl tracking-tight">{house.title}</h3>
+          {/* Updated to use type and location as the main heading */}
+<h3 className="text-white font-bold text-xl tracking-tight">
+  {house.type || "Property"} in {house.location}
+</h3>
           <span className="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded-md uppercase font-black tracking-widest w-fit mx-auto md:mx-0">
             ID: {house.id}
           </span>
         </div>
-        <p className="text-violet-400 font-bold text-lg">{house.price}</p>
+        {/* Formatting price with locale string for better readability */}
+        <p className="text-violet-400 font-bold text-lg">
+          Ksh {Number(house.price).toLocaleString()}
+        </p>
         <p className="text-gray-500 text-sm flex items-center justify-center md:justify-start gap-1">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

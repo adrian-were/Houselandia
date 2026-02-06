@@ -89,6 +89,29 @@
         "phone": "+254711222333",
         "image": "https://i.pravatar.cc/150?u=john"
       }
+    },
+    {
+      "id": "1439",
+      "type": "Villa",
+      "location": "Kilimani",
+      "bedrooms": 2,
+      "bathrooms": 3,
+      "surface": "3200sqft",
+      "price": 80000,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwmxezEDIRRjDHDFd6Hz5GQxLMpi0eO7zug&s",
+      "imageLg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwmxezEDIRRjDHDFd6Hz5GQxLMpi0eO7zug&s",
+      "description": "This modern 2-bedroom apartment in Kilimani offers a spacious living and dining area with a balcony, a master ensuite bedroom, and a well-fitted kitchen with quality finishes. The property features 24-hour security, ample parking, backup power, and reliable water supply. Conveniently located near malls, schools, hospitals, and major roads, it’s ideal for comfortable urban living.",
+      "gallery": [
+        "https://sarabirealtygroup.co.ke/wp-content/uploads/2023/12/1-525x328.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6nd3wFUVbPiL1BG45yyR7a8PudJgtnwv5cA&s",
+        "https://commercialpropertykenya.com/wp-content/uploads/2025/08/Crescent-Apartment-2-bedroom-bigger-10-scaled.jpeg",
+        "https://vaal.co.ke/wp-content/uploads/2023/03/DSC_0162-scaled.webp"
+      ],
+      "agent": {
+        "name": "Ivy Safari",
+        "phone": "+254711222333",
+        "image": "https://i.pravatar.cc/150?u=newagent"
+      }
     }
   ]
 }
