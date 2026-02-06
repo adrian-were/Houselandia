@@ -10,15 +10,6 @@ const Footer = () => {
                 About
             </a>
             <a href="#" className="text-sm leading-6 text-gray-400 hover:text-violet-400 transition-colors">
-                Blog
-            </a>
-            <a href="#" className="text-sm leading-6 text-gray-400 hover:text-violet-400 transition-colors">
-                Team
-            </a>
-            <a href="#" className="text-sm leading-6 text-gray-400 hover:text-violet-400 transition-colors">
-                Pricing
-            </a>
-            <a href="#" className="text-sm leading-6 text-gray-400 hover:text-violet-400 transition-colors">
                 Contact
             </a>
             <a href="#" className="text-sm leading-6 text-gray-400 hover:text-violet-400 transition-colors">
