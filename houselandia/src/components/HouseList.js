@@ -11,15 +11,21 @@ const HouseList = () => {
   useEffect(() => {
     setLoading(true);
     
-    // Construct the API URL
-    // JSON Server handles the search string (e.g., ?type=House) automatically
+    // Construct the API URL - ensuring it points to your housesData endpoint
     const apiUrl = `http://localhost:8000/housesData${search}`;
 
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        setHouses(data);
-        // Artificial delay for smooth UX transition
+        // --- SORTING LOGIC ---
+        // This ensures 'Available' properties always appear at the top
+        const sortedData = data.sort((a, b) => {
+          if (a.status === 'Available' && b.status === 'Sold') return -1;
+          if (a.status === 'Sold' && b.status === 'Available') return 1;
+          return 0;
+        });
+
+        setHouses(sortedData);
         setTimeout(() => setLoading(false), 600); 
       })
       .catch((err) => {
@@ -28,29 +34,28 @@ const HouseList = () => {
       });
   }, [search]);
 
-  // Loading Spinner Component
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800">
-        <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
-        <p className="mt-4 text-gray-500 font-medium">Searching properties...</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
+        <div className="w-12 h-12 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin"></div>
+        <p className="mt-4 text-gray-400 font-medium tracking-wide">Searching properties...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-800 py-12 px-6">
+    <div className="min-h-screen bg-gray-900 py-12 px-6">
       <div className="max-w-7xl mx-auto">
         
         {/* Navigation Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-white">Available Houses</h1>
-            <p className="text-white mt-2">Found {houses.length} properties matching your criteria</p>
+            <h1 className="text-4xl font-bold text-white tracking-tight">Available Houses</h1>
+            <p className="text-gray-400 mt-2 font-medium">Found {houses.length} properties matching your criteria</p>
           </div>
-          <Link to="/" className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-xl shadow-sm border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors">
-            <FontAwesomeIcon icon={faArrowLeft} />
-            <span>Back</span>
+          <Link to="/" className="inline-flex items-center gap-2 bg-gray-800 px-6 py-3 rounded-2xl shadow-lg border border-gray-700 text-white hover:bg-gray-700 transition-all active:scale-95">
+            <FontAwesomeIcon icon={faArrowLeft} className="text-violet-400" />
+            <span className="font-bold">Back to Search</span>
           </Link>
         </div>
 
@@ -58,64 +63,68 @@ const HouseList = () => {
         {houses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {houses.map((house) => (
-              /* The entire card is now a Link pointing to the details page */
               <Link 
                 to={`/house/${house.id}`} 
                 key={house.id} 
-                className="group bg-gray-700 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
+                className={`group bg-gray-800/40 backdrop-blur-md rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-violet-900/10 transition-all duration-500 border border-gray-800 hover:border-violet-500/30 flex flex-col relative ${house.status === 'Sold' ? 'opacity-80' : ''}`}
               >
-                {/* Image Container */}
+                {/* Image Container with 'Sold' Overlay */}
                 <div className="relative overflow-hidden h-72">
                   <img 
                     src={house.image} 
                     alt={house.type} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-5 left-5">
-                    <span className="bg-black/90 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
+                  
+                  {/* Status Badges */}
+                  <div className="absolute top-5 left-5 flex gap-2">
+                    <span className="bg-gray-950/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border border-white/10">
                       {house.type}
                     </span>
                   </div>
+
+                  {/* VISUAL OVERLAY FOR SOLD PROPERTIES */}
+                  {house.status === 'Sold' && (
+                    <div className="absolute inset-0 bg-gray-900/70 backdrop-blur-[2px] flex items-center justify-center">
+                      <div className="border-4 border-red-500 text-red-500 font-black text-3xl uppercase px-6 py-2 -rotate-12 tracking-tighter">
+                        Rented
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
                 <div className="p-8 flex-grow">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-white group-hover:text-violet-600 transition-colors">
+                      <h2 className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors duration-300">
                         {house.location}
                       </h2>
                     </div>
                     <div className="text-right">
-                      <p className="text-violet-600 text-xl font-black">
+                      <p className="text-violet-400 text-xl font-black">
                         Ksh {house.price ? house.price.toLocaleString() : "N/A"}
                       </p>
                     </div>
                   </div>
                   
-                  <p className="text-white leading-relaxed mb-8 line-clamp-2">
+                  <p className="text-gray-400 leading-relaxed mb-8 line-clamp-2 text-sm">
                     {house.description}
                   </p>
 
                   {/* House Specs */}
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-50 text-white">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <FontAwesomeIcon icon={faBed} />
-                      </div>
-                      <span className="text-sm font-semibold">{house.bedrooms} Beds</span>
+                  <div className="grid grid-cols-3 items-center pt-6 border-t border-gray-700/50 text-gray-300">
+                    <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
+                      <FontAwesomeIcon icon={faBed} className="text-violet-500 text-sm" />
+                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.bedrooms || 0} Bed</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <FontAwesomeIcon icon={faBath} />
-                      </div>
-                      <span className="text-sm font-semibold">{house.bathrooms} Baths</span>
+                    <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
+                      <FontAwesomeIcon icon={faBath} className="text-violet-500 text-sm" />
+                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.bathrooms || 0} Bath</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                        <FontAwesomeIcon icon={faRulerCombined} />
-                      </div>
-                      <span className="text-sm font-semibold">{house.surface}</span>
+                    <div className="flex flex-col items-center gap-1">
+                      <FontAwesomeIcon icon={faRulerCombined} className="text-violet-500 text-sm" />
+                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.surface || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
@@ -124,10 +133,14 @@ const HouseList = () => {
           </div>
         ) : (
           /* Empty State Section */
-          <div className="text-center bg-gray-700 py-32 bg-white rounded-[2rem] border-2 border-dashed border-gray-100">
+          <div className="text-center bg-gray-800/20 py-32 rounded-[3rem] border-2 border-dashed border-gray-800 shadow-inner">
             <div className="max-w-md mx-auto">
-              <h3 className="text-2xl font-bold text-white">No Match Found</h3>
-              <p className="text-white mt-3 mb-8">We couldn't find any houses matching your specific search. Try going back and do a different search.</p>
+              <div className="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                <FontAwesomeIcon icon={faRulerCombined} className="text-gray-600 text-3xl" />
+              </div>
+              <h3 className="text-2xl font-bold text-white">No Properties Found</h3>
+              <p className="text-gray-500 mt-3 mb-8">We couldn't find any properties matching your criteria in Nairobi. Try adjusting your filters.</p>
+              <Link to="/" className="text-violet-400 font-bold hover:underline">Clear all filters</Link>
             </div>
           </div>
         )}

@@ -21,7 +21,8 @@
         "name": "Sarah Njeri",
         "phone": "+254712345678",
         "image": "https://i.pravatar.cc/150?u=sarah"
-      }
+      },
+      "status": "Sold"
     },
     {
       "id": "2",
@@ -110,6 +111,30 @@
       "agent": {
         "name": "Ivy Safari",
         "phone": "+254711222333",
+        "image": "https://i.pravatar.cc/150?u=newagent"
+      }
+    },
+    {
+      "id": "41f3",
+      "type": "Apartment",
+      "location": "Langata",
+      "bedrooms": 2,
+      "bathrooms": 3,
+      "surface": "2000sqft",
+      "price": 60000,
+      "image": "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372334/dvdghe3ynwaglatsipyk.jpg",
+      "imageLg": "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372334/dvdghe3ynwaglatsipyk.jpg",
+      "description": "This well-designed 2-bedroom apartment in Langata features a spacious living and dining area, a master ensuite bedroom, and a modern kitchen with ample storage. The property offers 24-hour security, sufficient parking, and a reliable water supply. Conveniently located near schools, shopping centers, hospitals, and major roads, it provides comfortable and secure living in a quiet neighborhood.",
+      "gallery": [
+        "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372343/hbph3v6yykcarix5rzxo.jpg",
+        "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372352/jbmrwqekeoyqm37fvtai.jpg",
+        "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372359/xkgi3inpbd680qcodh3x.jpg",
+        "https://res.cloudinary.com/dfnak2eex/image/upload/v1770372368/arlycnekhkzajucqrk28.jpg",
+        "https://res.cloudinary.com/dfnak2eex/image/upload/v1770373116/fpiepxrexbrrymctptut.avif"
+      ],
+      "agent": {
+        "name": "Kelvin Kilwa",
+        "phone": "+254765456122",
         "image": "https://i.pravatar.cc/150?u=newagent"
       }
     }

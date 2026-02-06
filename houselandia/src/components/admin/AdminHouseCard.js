@@ -20,6 +20,11 @@ const AdminHouseCard = ({ house, onEdit, onDelete }) => {
 <h3 className="text-white font-bold text-xl tracking-tight">
   {house.type || "Property"} in {house.location}
 </h3>
+<span className={`px-2 py-1 rounded text-[10px] font-bold ${
+    house.status === 'Sold' ? 'bg-red-500/20 text-red-500' : 'bg-green-500/20 text-green-500'
+  }`}>
+    {house.status || 'Available'}
+  </span>
           <span className="text-[10px] bg-gray-800 text-gray-400 px-2 py-1 rounded-md uppercase font-black tracking-widest w-fit mx-auto md:mx-0">
             ID: {house.id}
           </span>
