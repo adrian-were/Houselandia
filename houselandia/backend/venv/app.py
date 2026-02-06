@@ -40,7 +40,7 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "User created successfully"}), 201
+    return {"message": "User created successfully"}, 201
 
 # 4. Login Route
 @app.route('/api/login', methods=['POST'])
@@ -51,7 +51,7 @@ def login():
     if user and bcrypt.check_password_hash(user.password, data.get('password')):
         return jsonify({"message": "Login successful", "email": user.email}), 200
     
-    return jsonify({"error": "Invalid email or password"}), 401
+    return {"error": "Invalid email or password"}, 401
 
 @app.route('/api/test', methods=['GET'])
 def test():
