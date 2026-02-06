@@ -53,9 +53,9 @@ def login():
     
     return {"error": "Invalid email or password"}, 401
 
-@app.route('/api/test', methods=['GET'])
-def test():
-    return jsonify({"status": "Server is up and running!"}), 200
+@app.route('/')
+def home():
+    return {"status": "Houselandia API is running"}, 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
