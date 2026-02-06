@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -10,7 +9,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   // State for toggling password visibility
   const [showPassword, setShowPassword] = useState(false);
   
-  const navigate = useNavigate();
+  // Note: 'navigate' was removed here because it was unused and causing build errors.
 
   if (!isOpen) return null;
 
@@ -73,7 +72,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
           </button>
 
           <div className="flex flex-col items-center mb-8">
-            <img className="w-10 h-10 mb-3" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+            <img className="w-10 h-10 mb-3" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="Houselandia Logo" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
           </div>
 

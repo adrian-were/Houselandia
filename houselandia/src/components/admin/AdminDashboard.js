@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('All');
 
- const API_URL = 'http://localhost:8000/housesData';
+  const API_URL = 'https://houselandia-api.onrender.com/housesData';
 
   useEffect(() => {
     fetchHouses();
@@ -32,59 +32,57 @@ const AdminDashboard = () => {
 
   // --- STATS CALCULATIONS ---
   const totalHouses = houses.length;
-const averagePrice = houses.length > 0 
-  ? Math.round(houses.reduce((acc, house) => {
-      // Ensure house.price is a string before calling .replace()
-      const priceStr = String(house.price || "0");
-      const numericPrice = Number(priceStr.replace(/[^0-9.-]+/g, ""));
-      return acc + (isNaN(numericPrice) ? 0 : numericPrice);
-    }, 0) / houses.length)
-  : 0;
+  const averagePrice = houses.length > 0 
+    ? Math.round(houses.reduce((acc, house) => {
+        const priceStr = String(house.price || "0");
+        const numericPrice = Number(priceStr.replace(/[^0-9.-]+/g, ""));
+        return acc + (isNaN(numericPrice) ? 0 : numericPrice);
+      }, 0) / houses.length)
+    : 0;
 
   // --- SEARCH & FILTER LOGIC ---
-const filteredHouses = houses.filter(house => {
+  const filteredHouses = houses.filter(house => {
+    // 1. Normalize all values
+    const houseType = (house.type || "").toString().toLowerCase().trim();
+    const houseLocation = (house.location || "").toString().toLowerCase().trim();
     
-  // 1. Normalize all values (Lowercasse + Trim spaces)
-  const houseType = (house.type || "").toString().toLowerCase().trim();
-  const houseLocation = (house.location || "").toString().toLowerCase().trim();
-  
-  const searchQueryLower = searchQuery.toLowerCase().trim();
-  const filterTypeLower = filterType.toLowerCase().trim();
+    const searchQueryLower = searchQuery.toLowerCase().trim();
+    const filterTypeLower = filterType.toLowerCase().trim();
 
-  // 2. Search logic: Match location OR type
-  const matchesSearch = houseLocation.includes(searchQueryLower) || 
-                        houseType.includes(searchQueryLower);
-  
-  // 3. Category logic: Match 'all' OR the specific type
-  const matchesCategory = filterTypeLower === 'all' || 
-                          houseType === filterTypeLower;
-  
-  return matchesSearch && matchesCategory;
-  console.log(`Checking House: ${house.location}, Type: ${house.type}, matches: ${matchesSearch && matchesCategory}`);
-});
+    // 2. Search logic: Match location OR type
+    const matchesSearch = houseLocation.includes(searchQueryLower) || 
+                          houseType.includes(searchQueryLower);
+    
+    // 3. Category logic: Match 'all' OR the specific type
+    const matchesCategory = filterTypeLower === 'all' || 
+                            houseType === filterTypeLower;
+    
+    // Fixed: Logic must return a value; console.log was moved before the return
+    // to avoid "unreachable code" errors during the build process.
+    return matchesSearch && matchesCategory;
+  });
 
   // --- CRUD HANDLERS ---
- const handleAddHouse = async (newHouse) => {
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newHouse),
-    });
+  const handleAddHouse = async (newHouse) => {
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newHouse),
+      });
 
-    if (res.ok) {
-      // Clear the form and refresh data ONLY if the response is 200/201
-      setIsAdding(false);
-      await fetchHouses(); // Wait for the refresh to finish
-    } else {
-      const errorText = await res.text();
-      throw new Error(errorText || "Server rejected the data");
+      if (res.ok) {
+        setIsAdding(false);
+        await fetchHouses(); 
+      } else {
+        const errorText = await res.text();
+        throw new Error(errorText || "Server rejected the data");
+      }
+    } catch (err) {
+      console.error("Post Error:", err);
+      alert("Could not save the house. Please check if your JSON server is running.");
     }
-  } catch (err) {
-    console.error("Post Error:", err);
-    alert("Could not save the house. Please check if your JSON server is running.");
-  }
-};
+  };
 
   const handleUpdateHouse = async (updatedFields) => {
     try {
@@ -197,9 +195,8 @@ const filteredHouses = houses.filter(house => {
             >
               <option value="All">All Types</option>
               <option value="Apartment">Apartment</option>
-              <option value="Mansion">Bungalow</option>
+              <option value="Bungalow">Bungalow</option>
               <option value="Villa">Villa</option>
-
             </select>
           </div>
         )}

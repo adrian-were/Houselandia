@@ -17,7 +17,7 @@ function Banner() {
           </p>
         </div>
         <div className='hidden flex-1 lg:flex justify-end items-end'>
-          <img src={HouseBanner} alt='houselandia logo picture'/>
+          <img src={HouseBanner} alt="modern home"/>
         </div>
       </div>
       <Search/>

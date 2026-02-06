@@ -12,7 +12,7 @@ const HouseList = () => {
     setLoading(true);
     
     // Construct the API URL - ensuring it points to your housesData endpoint
-    const apiUrl = `http://localhost:8000/housesData${search}`;
+    const apiUrl = `https://houselandia-api.onrender.com/housesData${search}`;
 
     fetch(apiUrl)
       .then((res) => res.json())
