@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Signup = ({ isOpen, onClose }) => {
   const initialFormState = {
@@ -13,18 +13,18 @@ const Signup = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Helper to clear everything
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setFormData(initialFormState);
     setError('');
     setShowPassword(false);
-  };
+  }, []);
 
   // Reset form whenever the modal is closed
   useEffect(() => {
     if (!isOpen) {
       resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen,resetForm]);
 
   // Real-time password matching check
   useEffect(() => {

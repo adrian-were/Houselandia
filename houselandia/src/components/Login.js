@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
-  // State for toggling password visibility
+
   const [showPassword, setShowPassword] = useState(false);
 
   // Helper to clear form state
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setEmail('');
     setPassword('');
     setError('');
     setShowPassword(false);
-  };
+  }, []);
 
   // Reset form whenever the modal is closed
   useEffect(() => {
     if (!isOpen) {
       resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
   if (!isOpen) return null;
 
