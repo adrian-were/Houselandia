@@ -136,7 +136,9 @@ const Signup = ({ isOpen, onClose }) => {
 
           <div className="p-8">
             <div className="flex flex-col items-center mb-6">
-              <img className="w-10 h-10 mb-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+<div className="w-12 h-12 mb-2 bg-violet-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
+    <span className="text-white text-3xl font-black italic">H</span>
+  </div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create Account</h1>
             </div>
 

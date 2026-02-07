@@ -84,7 +84,9 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
           </button>
 
           <div className="flex flex-col items-center mb-8">
-            <img className="w-10 h-10 mb-3" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="Houselandia Logo" />
+<div className="w-12 h-12 mb-2 bg-violet-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
+    <span className="text-white text-3xl font-black italic">H</span>
+  </div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
           </div>
 
