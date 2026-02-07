@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
 const Signup = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
+  const initialFormState = {
     email: '',
     password: '',
     confirmPassword: ''
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
-  // State for toggling password visibility
   const [showPassword, setShowPassword] = useState(false);
+
+  // Helper to clear everything
+  const resetForm = () => {
+    setFormData(initialFormState);
+    setError('');
+    setShowPassword(false);
+  };
+
+  // Reset form whenever the modal is closed
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   // Real-time password matching check
   useEffect(() => {
@@ -79,6 +93,8 @@ const Signup = ({ isOpen, onClose }) => {
 
       if (response.ok) {
         alert("Account created successfully!");
+        // We don't need to manually reset here because 
+        // the useEffect above catches when onClose() is called
         onClose(); 
       } else {
         setError(data.error || 'Registration failed');
@@ -140,7 +156,6 @@ const Signup = ({ isOpen, onClose }) => {
                 />
               </div>
 
-              {/* Password Field with Icon */}
               <div className="relative">
                 <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
                 <input 
@@ -166,7 +181,6 @@ const Signup = ({ isOpen, onClose }) => {
                 </button>
               </div>
 
-              {/* Confirm Password Field */}
               <div>
                 <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
                 <input 

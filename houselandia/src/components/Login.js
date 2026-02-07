@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -8,8 +8,21 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   
   // State for toggling password visibility
   const [showPassword, setShowPassword] = useState(false);
-  
-  // Note: 'navigate' was removed here because it was unused and causing build errors.
+
+  // Helper to clear form state
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setError('');
+    setShowPassword(false);
+  };
+
+  // Reset form whenever the modal is closed
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -29,7 +42,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
 
       if (response.ok) {
         onLoginSuccess(data.email);
-        onClose();
+        onClose(); // The useEffect will handle resetting the state
       } else {
         setError(data.error || 'Invalid email or password');
       }
@@ -95,7 +108,6 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
               />
             </div>
             
-            {/* Password Field with Toggle Icon */}
             <div className="relative">
               <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
               <input 
@@ -112,13 +124,11 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
                 className="absolute right-3 top-[38px] text-gray-500 hover:text-violet-600 dark:text-gray-400 transition-colors"
               >
                 {showPassword ? (
-                  /* Eye Open Icon */
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 ) : (
-                  /* Eye Closed (Slash) Icon */
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88L1 1m11.92 11.92L23 23" />
                   </svg>
