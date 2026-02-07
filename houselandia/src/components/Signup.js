@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const Signup = ({ isOpen, onClose }) => {
   const initialFormState = {
     email: '',
     password: '',
     confirmPassword: ''
   };
+const Signup = ({ isOpen, onClose }) => {
 
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState('');
