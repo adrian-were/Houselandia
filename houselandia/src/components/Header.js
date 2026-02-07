@@ -31,7 +31,7 @@ const Header = ({ user, onLogout, onLoginClick, onSignupClick }) => {
     >
       <div className='container mx-auto flex justify-between items-center px-4'>
         <Link to='/' onClick={() => setIsMobileMenuOpen(false)}>
-          <span className="text-2xl font-bold text-white tracking-tight">Logo</span>
+          <span className="text-2xl font-bold text-violet-700 tracking-tight"><span className="text-white">House</span>landia</span>
         </Link>
 
         <div className='hidden md:flex items-center gap-8'>
