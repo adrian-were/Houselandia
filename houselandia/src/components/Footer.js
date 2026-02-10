@@ -41,7 +41,7 @@ const Footer = () => {
         
         {/* Copyright - Tighter and darker */}
         <p className="mt-6 text-xs leading-5 text-center text-gray-600">
-            &copy; {new Date().getFullYear()} HomeLand Homes, Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Houselandia Inc. All rights reserved.
         </p>
     </div>
   </footer> 
