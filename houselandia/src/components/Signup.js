@@ -139,7 +139,7 @@ const Signup = ({ isOpen, onClose }) => {
 <div className="w-12 h-12 mb-2 bg-violet-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
     <span className="text-white text-3xl font-black italic">H</span>
   </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create Account</h1>
+              <h1 className="text-2xl font-bold text-white dark:text-white">Create Account</h1>
             </div>
 
             {error && (
@@ -153,7 +153,7 @@ const Signup = ({ isOpen, onClose }) => {
                 <label className="block mb-1 text-sm font-medium text-white dark:text-white">Email Address</label>
                 <input 
                   type="email" name="email" value={formData.email} onChange={handleChange}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+                  className="w-full p-2.5 bg-gray-600 text-white placeholder-gray-400 border border-gray-500 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700" 
                   placeholder="your@email.com" required 
                 />
               </div>
@@ -162,7 +162,7 @@ const Signup = ({ isOpen, onClose }) => {
                 <label className="block mb-1 text-sm font-medium text-white dark:text-white">Password</label>
                 <input 
                   type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange}
-                  className="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+                  className="w-full p-2.5 bg-gray-600 text-white placeholder-gray-400 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700" 
                   placeholder="••••••••" required 
                 />
                 <button 
@@ -187,7 +187,7 @@ const Signup = ({ isOpen, onClose }) => {
                 <label className="block mb-1 text-sm font-medium text-white dark:text-white">Confirm Password</label>
                 <input 
                   type={showPassword ? "text" : "password"} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange}
-                  className={`w-full p-2.5 bg-gray-50 border rounded-lg focus:ring-2 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
+                  className={`w-full p-2.5 bg-gray-600 text-white border rounded-lg focus:ring-2 outline-none dark:bg-gray-700 ${
                     formData.confirmPassword && formData.password !== formData.confirmPassword 
                     ? 'border-red-500 focus:ring-red-500' 
                     : 'border-gray-300 focus:ring-violet-500'
