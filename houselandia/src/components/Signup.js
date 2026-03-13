@@ -126,7 +126,7 @@ const Signup = ({ isOpen, onClose }) => {
         onClick={handleBackdropClick}
         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       >
-        <div className="animate-signup relative w-full max-w-md bg-violet rounded-[2.5rem] shadow-2xl dark:bg-gray-800 border dark:border-gray-700">
+        <div className="animate-signup relative w-full max-w-md bg-violet-900 rounded-[2.5rem] shadow-2xl dark:bg-gray-800 border dark:border-gray-700">
           
           <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:hover:text-white p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-all">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
