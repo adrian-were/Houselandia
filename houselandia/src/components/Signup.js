@@ -150,7 +150,7 @@ const Signup = ({ isOpen, onClose }) => {
 
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                <label className="block mb-1 text-sm font-medium text-white dark:text-white">Email Address</label>
                 <input 
                   type="email" name="email" value={formData.email} onChange={handleChange}
                   className="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
@@ -159,7 +159,7 @@ const Signup = ({ isOpen, onClose }) => {
               </div>
 
               <div className="relative">
-                <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                <label className="block mb-1 text-sm font-medium text-white dark:text-white">Password</label>
                 <input 
                   type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange}
                   className="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
@@ -184,7 +184,7 @@ const Signup = ({ isOpen, onClose }) => {
               </div>
 
               <div>
-                <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
+                <label className="block mb-1 text-sm font-medium text-white dark:text-white">Confirm Password</label>
                 <input 
                   type={showPassword ? "text" : "password"} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange}
                   className={`w-full p-2.5 bg-gray-50 border rounded-lg focus:ring-2 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
