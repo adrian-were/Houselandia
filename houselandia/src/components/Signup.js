@@ -78,10 +78,9 @@ const Signup = ({ isOpen, onClose }) => {
     }
 
     setLoading(true);
-
-    try {
 const API_URL = import.process.env.REACT_APP_API_URL || 'http://localhost:5000'; 
 // (Use process.env.REACT_APP_API_URL if using Create React App)
+    try {
 
 const response = await fetch(`${API_URL}/api/signup`, {
   method: 'POST',
