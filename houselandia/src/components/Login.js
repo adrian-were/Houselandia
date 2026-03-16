@@ -25,20 +25,15 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
 
   if (!isOpen) return null;
   
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   setError('');
-  
-  // 1. Basic Client-side Validation
-  if (formData.password.length < 8) {
-    return setError('Password must be at least 8 characters');
-  }
-
   setLoading(true);
+
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   try {
-    const response = await fetch(`${API_URL}/api/login`, {
+    const response = await fetch(`${API_URL}/api/login`, { // Changed endpoint
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -47,22 +42,25 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
       }),
     });
 
-    // 2. Safely parse JSON
-    const contentType = response.headers.get("content-type");
-    const data = contentType && contentType.includes("application/json") 
-      ? await response.json() 
-      : {};
+    const data = await response.json();
 
     if (response.ok) {
-      onLoginSuccess(data.email);
+      // 1. Store the token if your backend provides one
+      if (data.token) {
+        localStorage.setItem('userToken', data.token);
+      }
+
+      // 2. Pass the user data up to your App state
+      onLoginSuccess(data.user || data.email); 
       onClose();
     } else {
-      // 3. Handle specific status codes if needed
-      setError(data.error || `Error: ${response.statusText}`);
+      // 3. Security Tip: Use generic error messages
+      // Instead of "User not found", use "Invalid email or password"
+      // to prevent hackers from "fishing" for valid email addresses.
+      setError(data.error || 'Invalid email or password');
     }
   } catch (err) {
-    // This catches network failures or JS errors
-    setError('Check your internet connection or try again later.');
+    setError('Could not connect to the server.');
   } finally {
     setLoading(false);
   }
