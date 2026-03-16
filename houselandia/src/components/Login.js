@@ -31,7 +31,7 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://houselandia-users-api.onrender.com/api/login', {
+      const response = await fetch('https://houselandia-production.up.railway.app/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
