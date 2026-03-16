@@ -80,14 +80,17 @@ const Signup = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://houselandia-production.up.railway.app/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        }),
-      });
+const API_URL = import.process.env.REACT_APP_API_URL || 'http://localhost:5000'; 
+// (Use process.env.REACT_APP_API_URL if using Create React App)
+
+const response = await fetch(`${API_URL}/api/signup`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: formData.email,
+    password: formData.password
+  }),
+});
 
       const data = await response.json();
 
