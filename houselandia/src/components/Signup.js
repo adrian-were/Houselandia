@@ -80,7 +80,7 @@ const Signup = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://houselandia-users-api.onrender.com/api/signup', {
+      const response = await fetch('https://houselandia-production.up.railway.app/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
