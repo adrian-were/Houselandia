@@ -86,7 +86,7 @@ const handleSubmit = async (e) => {
         onClick={handleBackdropClick}
         className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       >
-        <section className="animate-login relative w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl dark:bg-gray-800 p-8 border dark:border-gray-700">
+        <section className="animate-login relative w-full max-w-md bg-gray-900/40 rounded-[2.5rem] shadow-2xl backdrop-blur-md p-8 border border-white/10">
           
           <button 
             onClick={onClose} 
@@ -115,7 +115,7 @@ const handleSubmit = async (e) => {
               <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
               <input 
                 type="email" 
-                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+               className="w-full p-3 bg-gray-600/50 text-white placeholder-gray-400 border border-gray-500/50 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
@@ -127,7 +127,7 @@ const handleSubmit = async (e) => {
               <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
               <input 
                 type={showPassword ? "text" : "password"} 
-                className="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
+               className="w-full p-3 bg-gray-600/50 text-white placeholder-gray-400 border border-gray-500/50 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
