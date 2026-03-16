@@ -24,33 +24,49 @@ const Login = ({ isOpen, onClose, onLoginSuccess }) => {
   }, [isOpen, resetForm]);
 
   if (!isOpen) return null;
+  
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  
+  // 1. Basic Client-side Validation
+  if (formData.password.length < 8) {
+    return setError('Password must be at least 8 characters');
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+  setLoading(true);
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-    try {
-      const response = await fetch('https://houselandia-production.up.railway.app/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const response = await fetch(`${API_URL}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password
+      }),
+    });
 
-      const data = await response.json();
+    // 2. Safely parse JSON
+    const contentType = response.headers.get("content-type");
+    const data = contentType && contentType.includes("application/json") 
+      ? await response.json() 
+      : {};
 
-      if (response.ok) {
-        onLoginSuccess(data.email);
-        onClose(); // The useEffect will handle resetting the state
-      } else {
-        setError(data.error || 'Invalid email or password');
-      }
-    } catch (err) {
-      setError('Connection to server failed.');
-    } finally {
-      setLoading(false);
+    if (response.ok) {
+      onLoginSuccess(data.email);
+      onClose();
+    } else {
+      // 3. Handle specific status codes if needed
+      setError(data.error || `Error: ${response.statusText}`);
     }
-  };
+  } catch (err) {
+    // This catches network failures or JS errors
+    setError('Check your internet connection or try again later.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) onClose();
