@@ -78,7 +78,7 @@ const Signup = ({ isOpen, onClose }) => {
     }
 
     setLoading(true);
-const API_URL = import.process.env.REACT_APP_API_URL || 'http://localhost:5000'; 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000'; 
 // (Use process.env.REACT_APP_API_URL if using Create React App)
     try {
 
