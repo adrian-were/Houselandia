@@ -108,7 +108,7 @@ const HouseList = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-400 leading-relaxed mb-8 line-clamp-2 text-sm">
+                  <p className="text-white leading-relaxed mb-8 line-clamp-2 text-sm">
                     {house.description}
                   </p>
 
