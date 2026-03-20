@@ -101,7 +101,7 @@ const handleSubmit = async (e) => {
 <div className="w-12 h-12 mb-2 bg-violet-600 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
     <span className="text-white text-3xl font-black italic">H</span>
   </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
+            <h1 className="text-2xl font-bold text-white dark:text-white">Welcome Back</h1>
           </div>
 
           {error && (
@@ -112,7 +112,7 @@ const handleSubmit = async (e) => {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+              <label className="block mb-2 text-sm font-medium text-white dark:text-gray-300">Email</label>
               <input 
                 type="email" 
                className="w-full p-3 bg-gray-600/50 text-white placeholder-gray-400 border border-gray-500/50 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all"
@@ -124,7 +124,7 @@ const handleSubmit = async (e) => {
             </div>
             
             <div className="relative">
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+              <label className="block mb-2 text-sm font-medium text-white dark:text-gray-300">Password</label>
               <input 
                 type={showPassword ? "text" : "password"} 
                className="w-full p-3 bg-gray-600/50 text-white placeholder-gray-400 border border-gray-500/50 rounded-lg focus:ring-2 focus:ring-violet-500 outline-none transition-all" 
