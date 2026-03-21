@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import json 
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -67,6 +68,72 @@ def login():
 @app.route('/')
 def home():
     return {"status": "Houselandia API is running"}, 200
+
+class Listing(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    type = db.Column(db.String(50))
+    location = db.Column(db.String(100))
+    bedrooms = db.Column(db.Integer)
+    bathrooms = db.Column(db.Integer)
+    surface = db.Column(db.String(50))
+    price = db.Column(db.Integer)
+    image = db.Column(db.String(500))
+    imageLg = db.Column(db.String(500))
+    description = db.Column(db.Text)
+    status = db.Column(db.String(20), default="Available")
+    
+    # We store these as Text and convert to JSON in the routes
+    gallery = db.Column(db.Text) 
+    agent = db.Column(db.Text) 
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "type": self.type,
+            "location": self.location,
+            "bedrooms": self.bedrooms,
+            "bathrooms": self.bathrooms,
+            "surface": self.surface,
+            "price": self.price,
+            "image": self.image,
+            "imageLg": self.imageLg,
+            "description": self.description,
+            "status": self.status,
+            "gallery": json.loads(self.gallery) if self.gallery else [],
+            "agent": json.loads(self.agent) if self.agent else {}
+        }
+
+@app.route('/api/housesData', methods=['GET'])
+def get_houses():
+    listings = Listing.query.all()
+    return jsonify([h.to_dict() for h in listings])
+
+@app.route('/api/housesData', methods=['POST'])
+def add_house():
+    data = request.json
+    try:
+        new_house = Listing(
+            type=data.get('type'),
+            location=data.get('location'),
+            bedrooms=int(data.get('bedrooms', 0)),
+            bathrooms=int(data.get('bathrooms', 0)),
+            surface=data.get('surface'),
+            price=int(data.get('price', 0)),
+            image=data.get('image'),
+            imageLg=data.get('imageLg'),
+            description=data.get('description'),
+            status=data.get('status', 'Available'),
+            # Convert dict/list to string for database storage
+            gallery=json.dumps(data.get('gallery', [])),
+            agent=json.dumps(data.get('agent', {}))
+        )
+        db.session.add(new_house)
+        db.session.commit()
+        
+        return jsonify(new_house.to_dict()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     # Use port assigned by Render, default to 5000 for local
