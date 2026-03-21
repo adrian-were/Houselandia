@@ -19,7 +19,7 @@ const HouseDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
-    fetch(`https://houselandia-api.onrender.com/housesData/${id}`)
+    fetch(`https://houselandia-production.up.railway.app/api/housesData/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Property not found");
         return res.json();
