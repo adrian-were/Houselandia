@@ -135,6 +135,20 @@ def add_house():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/housesData/<int:house_id>', methods=['DELETE'])
+def delete_house(house_id):
+    house = Listing.query.get(house_id)
+    if not house:
+        return jsonify({"error": "House not found"}), 404
+    
+    try:
+        db.session.delete(house)
+        db.session.commit()
+        return jsonify({"message": f"House {house_id} deleted successfully"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     # Use port assigned by Render, default to 5000 for local
     port = int(os.environ.get("PORT", 5000))
