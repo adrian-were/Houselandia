@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-import json 
 from flask_cors import CORS
+import json 
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 import os # Necessary to read Environment Variables
