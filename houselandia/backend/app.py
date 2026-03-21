@@ -29,10 +29,6 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False) # Increased length for production hashes
 
-# Create the database tables in the cloud
-with app.app_context():
-    db.create_all()
-
 # 3. Signup Route
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -148,6 +144,9 @@ def delete_house(house_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     # Use port assigned by Render, default to 5000 for local
