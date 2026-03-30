@@ -97,7 +97,7 @@ const HouseList = () => {
                 <div className="p-8 flex-grow">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors duration-300">
+                      <h2 className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors duration-300 tracking-wide">
                         {house.location}
                       </h2>
                     </div>
@@ -108,7 +108,7 @@ const HouseList = () => {
                     </div>
                   </div>
                   
-                  <p className="text-white leading-relaxed mb-8 line-clamp-2 text-sm">
+                  <p className="text-white leading-relaxed mb-8 line-clamp-2 text-sm tracking-wide">
                     {house.description}
                   </p>
 
@@ -116,15 +116,15 @@ const HouseList = () => {
                   <div className="grid grid-cols-3 items-center pt-6 border-t border-gray-700/50 text-gray-300">
                     <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
                       <FontAwesomeIcon icon={faBed} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.bedrooms || 0} Bed</span>
+                      <span className="text-[11px] font-bold uppercase tracking-wide">{house.bedrooms || 0} Bed</span>
                     </div>
                     <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
                       <FontAwesomeIcon icon={faBath} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.bathrooms || 0} Bath</span>
+                      <span className="text-[11px] font-bold uppercase tracking-wide">{house.bathrooms || 0} Bath</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <FontAwesomeIcon icon={faRulerCombined} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.surface || 'N/A'}</span>
+                      <span className="text-[11px] font-bold uppercase tracking-wide">{house.surface || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
