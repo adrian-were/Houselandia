@@ -100,44 +100,44 @@ class Listing(db.Model):
 
 @app.route('/api/housesData', methods=['GET'])
 def get_houses():
-    # 1. Capture filters from the URL query string
-    house_type = request.args.get('type')
-    location = request.args.get('location')
-    # You can also add price filters if your React search uses them
+    # 1. Capture filters and strip whitespace
+    house_type = request.args.get('type', '').strip()
+    location = request.args.get('location', '').strip()
     min_price = request.args.get('minPrice')
     max_price = request.args.get('maxPrice')
 
-    # 2. Start a base query
+    # 2. Start base query
     query = Listing.query
 
-    # 3. Apply filters only if they are provided in the URL
-    if house_type and house_type != 'all':
-        query = query.filter(Listing.type == house_type)
-    
-    if location:
-        # 'ilike' allows for case-insensitive partial matching (e.g. 'nai' finds 'Nairobi')
+    # 3. Apply Filters ONLY if they have meaningful values
+    # We check .lower() so 'All', 'all', or 'ALL' are all ignored correctly
+    if house_type and house_type.lower() not in ['all', 'any', 'houses']:
+        query = query.filter(Listing.type.ilike(f"{house_type}"))
+
+    if location and location.lower() not in ['all', 'any', 'locations']:
         query = query.filter(Listing.location.ilike(f"%{location}%"))
 
-    if min_price:
-        query = query.filter(Listing.price >= int(min_price))
-    
-    if max_price:
-        query = query.filter(Listing.price <= int(max_price))
+    # Price filters with safety checks to avoid crashes on non-numeric strings
+    try:
+        if min_price and min_price.isdigit():
+            query = query.filter(Listing.price >= int(min_price))
+        if max_price and max_price.isdigit():
+            query = query.filter(Listing.price <= int(max_price))
+    except ValueError:
+        pass # Ignore price filtering if values aren't numbers
 
-    # 4. Execute the final query
     listings = query.all()
-    
     return jsonify([h.to_dict() for h in listings])
 
 @app.route('/api/housesData/<int:house_id>', methods=['GET'])
 def get_single_house(house_id):
-    # This looks for the numeric ID in the database
-    house = Listing.query.get(house_id)
-    
+    house = db.session.get(Listing, house_id)
     if not house:
         return jsonify({"error": "Property not found"}), 404
-        
     return jsonify(house.to_dict()), 200
+
+# Signup, Login, POST and DELETE routes remain largely the same...
+# (Keep your existing implementations for those below)
 
 @app.route('/api/housesData', methods=['POST'])
 def add_house():
