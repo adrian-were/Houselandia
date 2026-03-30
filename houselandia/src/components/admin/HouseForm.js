@@ -8,7 +8,7 @@ const HouseForm = ({ initialData, onSubmit, onCancel }) => {
   const UPLOAD_PRESET = "Houselandia";
 
   const [formData, setFormData] = useState(initialData || {
-    type: '',
+    type: 'Apartment',
     location: '',
     status: 'Available',
     bedrooms: '',
