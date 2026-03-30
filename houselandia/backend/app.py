@@ -104,6 +104,16 @@ def get_houses():
     listings = Listing.query.all()
     return jsonify([h.to_dict() for h in listings])
 
+@app.route('/api/housesData/<int:house_id>', methods=['GET'])
+def get_single_house(house_id):
+    # This looks for the numeric ID in the database
+    house = Listing.query.get(house_id)
+    
+    if not house:
+        return jsonify({"error": "Property not found"}), 404
+        
+    return jsonify(house.to_dict()), 200
+
 @app.route('/api/housesData', methods=['POST'])
 def add_house():
     data = request.json
