@@ -100,31 +100,32 @@ class Listing(db.Model):
 
 @app.route('/api/housesData', methods=['GET'])
 def get_houses():
-    # 1. Capture filters and strip whitespace
+    # 1. Capture filters using the EXACT keys from your URL
     house_type = request.args.get('type', '').strip()
     location = request.args.get('location', '').strip()
-    min_price = request.args.get('minPrice')
-    max_price = request.args.get('maxPrice')
+    
+    # Updated these keys to match: price_gte and price_lte
+    min_price = request.args.get('price_gte') 
+    max_price = request.args.get('price_lte')
 
-    # 2. Start base query
     query = Listing.query
 
-    # 3. Apply Filters ONLY if they have meaningful values
-    # We check .lower() so 'All', 'all', or 'ALL' are all ignored correctly
+    # 2. Apply Type Filter
     if house_type and house_type.lower() not in ['all', 'any', 'houses']:
-        query = query.filter(Listing.type.ilike(f"{house_type}"))
+        query = query.filter(Listing.type.ilike(house_type))
 
+    # 3. Apply Location Filter
     if location and location.lower() not in ['all', 'any', 'locations']:
         query = query.filter(Listing.location.ilike(f"%{location}%"))
 
-    # Price filters with safety checks to avoid crashes on non-numeric strings
+    # 4. Apply Price Filters (with safety check)
     try:
-        if min_price and min_price.isdigit():
+        if min_price and min_price.strip():
             query = query.filter(Listing.price >= int(min_price))
-        if max_price and max_price.isdigit():
+        if max_price and max_price.strip():
             query = query.filter(Listing.price <= int(max_price))
-    except ValueError:
-        pass # Ignore price filtering if values aren't numbers
+    except (ValueError, TypeError):
+        pass # Ignore if the price isn't a valid number
 
     listings = query.all()
     return jsonify([h.to_dict() for h in listings])
