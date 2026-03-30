@@ -116,15 +116,15 @@ const HouseList = () => {
                   <div className="grid grid-cols-3 items-center pt-6 border-t border-gray-700/50 text-gray-300">
                     <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
                       <FontAwesomeIcon icon={faBed} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.bedrooms || 0} Bed</span>
+                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.bedrooms || 0} Bed</span>
                     </div>
                     <div className="flex flex-col items-center gap-1 border-r border-gray-700/50">
                       <FontAwesomeIcon icon={faBath} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.bathrooms || 0} Bath</span>
+                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.bathrooms || 0} Bath</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
                       <FontAwesomeIcon icon={faRulerCombined} className="text-violet-500 text-sm" />
-                      <span className="text-[11px] font-bold uppercase tracking-tighter">{house.surface || 'N/A'}</span>
+                      <span className="text-[11px] font-bold uppercase tracking-normal">{house.surface || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
