@@ -101,7 +101,33 @@ class Listing(db.Model):
 
 @app.route('/api/housesData', methods=['GET'])
 def get_houses():
-    listings = Listing.query.all()
+    # 1. Capture filters from the URL query string
+    house_type = request.args.get('type')
+    location = request.args.get('location')
+    # You can also add price filters if your React search uses them
+    min_price = request.args.get('minPrice')
+    max_price = request.args.get('maxPrice')
+
+    # 2. Start a base query
+    query = Listing.query
+
+    # 3. Apply filters only if they are provided in the URL
+    if house_type and house_type != 'all':
+        query = query.filter(Listing.type == house_type)
+    
+    if location:
+        # 'ilike' allows for case-insensitive partial matching (e.g. 'nai' finds 'Nairobi')
+        query = query.filter(Listing.location.ilike(f"%{location}%"))
+
+    if min_price:
+        query = query.filter(Listing.price >= int(min_price))
+    
+    if max_price:
+        query = query.filter(Listing.price <= int(max_price))
+
+    # 4. Execute the final query
+    listings = query.all()
+    
     return jsonify([h.to_dict() for h in listings])
 
 @app.route('/api/housesData/<int:house_id>', methods=['GET'])
