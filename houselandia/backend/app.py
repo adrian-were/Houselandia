@@ -11,7 +11,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins":"https://houselandia.vercel.app"}})
 
 # 1. Production Database Configuration
-# This looks for the DATABASE_URL you set in Render. 
 # It falls back to local sqlite only if DATABASE_URL isn't found.
 database_url = os.environ.get('DATABASE_URL')
 if database_url and database_url.startswith("postgres://"):
