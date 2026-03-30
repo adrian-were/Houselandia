@@ -61,55 +61,67 @@ const AdminDashboard = () => {
     // to avoid "unreachable code" errors during the build process.
     return matchesSearch && matchesCategory;
   });
-
+  
   // --- CRUD HANDLERS ---
-  const handleAddHouse = async (newHouse) => {
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newHouse),
-      });
 
-      if (res.ok) {
-        setIsAdding(false);
-        await fetchHouses(); 
-      } else {
-        const errorText = await res.text();
-        throw new Error(errorText || "Server rejected the data");
-      }
-    } catch (err) {
-      console.error("Post Error:", err);
-      alert("Could not save the house. Please check if your JSON server is running.");
+const handleAddHouse = async (newHouse) => {
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newHouse),
+    });
+
+    if (res.ok) {
+      setIsAdding(false);
+      await fetchHouses(); // Refresh list from PostgreSQL
+    } else {
+      const errorData = await res.json();
+      throw new Error(errorData.error || "Server rejected the data");
     }
-  };
+  } catch (err) {
+    console.error("Post Error:", err);
+    alert(`Could not save: ${err.message}`);
+  }
+};
 
-  const handleUpdateHouse = async (updatedFields) => {
-    try {
-      const res = await fetch(`${API_URL}/${editingHouse.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedFields),
-      });
-      if (res.ok) {
-        setEditingHouse(null);
-        fetchHouses();
-      }
-    } catch (err) {
-      alert("Error updating house");
+const handleUpdateHouse = async (updatedFields) => {
+  try {
+    // Change method to PUT to match your Flask @app.route
+    const res = await fetch(`${API_URL}/${editingHouse.id}`, {
+      method: 'PUT', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedFields),
+    });
+
+    if (res.ok) {
+      setEditingHouse(null);
+      await fetchHouses();
+    } else {
+      const errorData = await res.json();
+      alert(`Update failed: ${errorData.error}`);
     }
-  };
+  } catch (err) {
+    console.error("Update Error:", err);
+    alert("Error updating house. Check your Railway connection.");
+  }
+};
 
-  const handleDeleteHouse = async (id) => {
-    if (window.confirm("Are you sure you want to delete this listing?")) {
-      try {
-        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+const handleDeleteHouse = async (id) => {
+  if (window.confirm("Are you sure you want to delete this listing?")) {
+    try {
+      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        // Optimistic UI update: remove from state immediately
         setHouses(houses.filter(h => h.id !== id));
-      } catch (err) {
-        alert("Error deleting house");
+      } else {
+        alert("Delete failed on server.");
       }
+    } catch (err) {
+      alert("Error deleting house");
     }
-  };
+  }
+};
 
   return (
     <div className="relative min-h-screen bg-gray-950 pt-28 pb-20 px-4 overflow-hidden">
