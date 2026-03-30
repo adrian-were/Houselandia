@@ -169,20 +169,13 @@ def add_house():
 
 @app.route('/api/housesData/<int:house_id>', methods=['PUT'])
 def update_house(house_id):
-    # 1. Find the house in the database
     house = db.session.get(Listing, house_id)
-    
     if not house:
-        return jsonify({"error": "House not found"}), 404
+        return jsonify({"error": "Property not found"}), 404
 
-    # 2. Get the new data from the request
     data = request.get_json()
-    if not data:
-        return jsonify({"error": "No data provided"}), 400
-
     try:
-        # 3. Update the fields if they exist in the request
-        # Using .get() ensures we don't overwrite with None if a field is missing
+        # Update standard fields
         house.type = data.get('type', house.type)
         house.location = data.get('location', house.location)
         house.bedrooms = int(data.get('bedrooms', house.bedrooms))
@@ -194,20 +187,14 @@ def update_house(house_id):
         house.description = data.get('description', house.description)
         house.status = data.get('status', house.status)
 
-        # Handle complex JSON fields (Gallery and Agent)
+        # Handle JSON fields from your form (gallery array & agent object)
         if 'gallery' in data:
             house.gallery = json.dumps(data['gallery'])
         if 'agent' in data:
             house.agent = json.dumps(data['agent'])
 
-        # 4. Commit changes to the database
         db.session.commit()
-        
-        return jsonify({
-            "message": f"House {house_id} updated successfully",
-            "house": house.to_dict()
-        }), 200
-
+        return jsonify(house.to_dict()), 200
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
