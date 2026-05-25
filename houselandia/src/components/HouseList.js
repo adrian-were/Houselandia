@@ -17,7 +17,6 @@ const HouseList = () => {
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => {
-        // --- SORTING LOGIC ---
         // This ensures 'Available' properties always appear at the top
         const sortedData = data.sort((a, b) => {
           if (a.status === 'Available' && b.status === 'Sold') return -1;
