@@ -17,6 +17,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchHouses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchHouses = async () => {
