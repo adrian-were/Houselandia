@@ -12,7 +12,8 @@ const HouseList = () => {
     setLoading(true);
     
     // Construct the API URL - ensuring it points to your housesData endpoint
-    const apiUrl = `https://houselandia-production.up.railway.app/api/housesData${search}`;
+const BASE_URL = process.env.REACT_APP_API_URL || 'https://houselandia.onrender.com';
+    const apiUrl = `${BASE_URL}/api/housesData${search}`;
 
     fetch(apiUrl)
       .then((res) => res.json())

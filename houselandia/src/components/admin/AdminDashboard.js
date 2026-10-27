@@ -12,7 +12,8 @@ const AdminDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('All');
 
- const API_URL = 'https://houselandia-production.up.railway.app/api/housesData';
+  const BASE_URL = process.env.REACT_APP_API_URL || 'https://houselandia.onrender.com';
+ const API_URL = `${BASE_URL}/api/housesData`;
 
   useEffect(() => {
     fetchHouses();
